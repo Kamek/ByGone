@@ -4,11 +4,16 @@
 	import citrus.physics.nape.Nape;
 	import citrus.objects.platformer.nape.Platform;
 	import citrus.objects.platformer.nape.Hero;
+	import flash.display.MovieClip;
+	import citrus.utils.objectmakers.ObjectMaker2D;
 
 	public class StarlingDemoGameState extends StarlingState {
-
-		public function StarlingDemoGameState() {
+		public var player:Hero;
+		public var platform:Platform;
+		protected var level:MovieClip;
+		public function StarlingDemoGameState(_level:MovieClip) {
 			super();
+			level = _level;
 		}
 
 		override public function initialize():void {
@@ -17,8 +22,12 @@
 			physics.visible = true;
 			add(physics);
 			add(new Platform("bottom", {x:stage.stageWidth / 2, y:stage.stageHeight, width:stage.stageWidth}));
-			add(new Platform("cloud", {x:250, y:250, width:170, oneWay:true}));
-			add(new Hero("player", {x:260, y:260}));
+			ObjectMaker2D.FromMovieClip(level, true);
+			player = getObjectByName("hero") as Hero;
+			platform = getObjectByName("platform") as Platform;
+			player.x = 250;
+			player.y = 250;
+			
 		}
 	}
 }
