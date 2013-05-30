@@ -27,7 +27,7 @@
 			platform = getObjectByName("platform") as Platform;
 			player.x = 250;
 			player.y = 250;
-			
+			var p:Player = new Player("player");
 		}
 	}
 }
