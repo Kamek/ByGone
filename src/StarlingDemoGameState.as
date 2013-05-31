@@ -24,10 +24,11 @@
 			add(new Platform("bottom", {x:stage.stageWidth / 2, y:stage.stageHeight, width:stage.stageWidth}));
 			ObjectMaker2D.FromMovieClip(level, true);
 			player = getObjectByName("hero") as Hero;
+			player.controlsEnabled = false;
 			platform = getObjectByName("platform") as Platform;
-			player.x = 250;
-			player.y = 250;
-			var p:Player = new Player("player");
+			var testPlayer:Player = new Player("testPlayer", { x:350, y:350 } );
+			testPlayer.updateCallEnabled = true;
+			add(testPlayer);
 		}
 	}
 }
