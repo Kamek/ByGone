@@ -1,41 +1,28 @@
 ﻿package  {
 	import citrus.objects.CitrusSprite;
-	import citrus.input.controllers.Keyboard;
+	import citrus.system.components.ViewComponent;
+	import citrus.system.Entity;
 	
-	public class Player extends CitrusSprite {
-		public var acceleration:Number = 16;
-		public var moveKeyPressed:Boolean;
+	public class Player extends Entity {
+		public var viewComponent:ViewComponent;
+		public var playerInputController:PlayerInputController;
 
 		public function Player(name:String, params:Object=null) {
 			super(name, params);
-		}
-		
-		override public function update(timeDelta:Number):void {
-			super.update(timeDelta);
-			
-			moveKeyPressed = false;
- 
-			if (_ce.input.isDown(Keyboard.RIGHT)) {
-				this.x += (acceleration);
-				moveKeyPressed = true;
+			viewComponent = new ViewComponent("viewComponent", params);
+			playerInputController = new PlayerInputController("playerInputController", viewComponent);
+			add(viewComponent);
+			add(playerInputController);
+			viewComponent.view = new CitrusSprite("view", params);
+			super.initialize();
+			initialize();
+			if(params["x"]) {
+				viewComponent.view.x = params["x"];
 			}
- 
-			if (_ce.input.isDown(Keyboard.LEFT)) {
-				this.x -= (acceleration);
-				moveKeyPressed = true;
-			}
-			
-			if (_ce.input.isDown(Keyboard.UP)) {
-				this.y -= (acceleration);
-				moveKeyPressed = true;
-			}
-			
-			if (_ce.input.isDown(Keyboard.DOWN)) {
-				this.y += (acceleration);
-				moveKeyPressed = true;
+			if(params["y"]) {
+				viewComponent.view.y = params["y"];
 			}
 		}
-
 	}
 	
 }

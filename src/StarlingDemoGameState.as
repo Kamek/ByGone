@@ -28,7 +28,8 @@
 			platform = getObjectByName("platform") as Platform;
 			var testPlayer:Player = new Player("testPlayer", { x:350, y:350 } );
 			testPlayer.updateCallEnabled = true;
-			add(testPlayer);
+			addEntity(testPlayer);
+			add(testPlayer.viewComponent.view);
 		}
 	}
 }
